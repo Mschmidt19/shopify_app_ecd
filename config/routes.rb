@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   mount ShopifyApp::Engine, at: '/'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  post '/products/new' => 'products#new'
+  post '/products/new' => 'products#new2'
 end

@@ -93,6 +93,8 @@ GEM
       activesupport (>= 3.0, < 6.0)
       graphql (~> 1.6)
     hashie (3.5.7)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -238,6 +240,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  httparty
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg
