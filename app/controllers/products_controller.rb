@@ -13,7 +13,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def new2
-    body = {
+    @body = {
       "product": {
         "title": "Burton Custom Freestyle 151",
         "body_html": "<strong>Good snowboard!</strong>",
@@ -49,9 +49,12 @@ class ProductsController < ShopifyApp::AuthenticatedController
     }
     response = HTTParty.post(
       `https://#{@shop_session.url}/admin/products.json`,
-      :body => body.to_json,
+      :body => @body.to_json,
       :headers => {'Content-Type' => 'application/json'}
     )
+    p response
+
+
   end
 
   # private
