@@ -20,7 +20,7 @@
 <a href='/products/deleteall'><h2>Delete All Products</h2></a>
 <br>
 <h2>Create New Product</h2>
-<%= form_with url: '/products/new' do |f| %>
+<%= form_for @product do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.label :product_type %>
