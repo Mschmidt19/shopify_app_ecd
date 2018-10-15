@@ -1,8 +1,8 @@
-class ProductsController < ApplicationController
-  around_filter :shopify_session
-  layout 'embedded_app'
+class ProductsController < ShopifyApp::AuthenticatedController
+
   def new
     @product = ShopifyAPI::Product.new
+    p params
     @product.title = params[:title]
     @product.product_type = params[:product_type]
     if @product.save
