@@ -15,7 +15,19 @@
 
 <hr>
 
-<a href='/generate_products'><h2>Generate Products</h2></a>
+<a href='products/generate'><h2>Generate All Products</h2></a>
+<br>
+<a href='/products/deleteall'><h2>Delete All Products</h2></a>
+<br>
+<h2>Create New Product</h2>
+<%= form_with url: '/products/create' do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :product_type %>
+  <%= f.text_field :product_type %>
+  <%= f.submit "Create" %>
+<% end %>
+
 
 <!-- <h2>Webhooks</h2>
 
