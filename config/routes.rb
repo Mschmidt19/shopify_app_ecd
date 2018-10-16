@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   post '/products/new' => 'products#new'
 
-  post '/products/new2' => 'products#new2'
+  get '/products/generateall' => 'products#generateall'
+
+  get '/products/deleteall' => 'products#deleteall'
 end
