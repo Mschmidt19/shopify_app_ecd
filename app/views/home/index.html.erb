@@ -18,6 +18,8 @@
 <br>
 <%= button_to 'Generate all products', '/products/generateall' %>
 <br>
+<%= button_to 'Generate One', '/products/generateone' %>
+<br>
 <%= button_to 'Delete all products', '/products/deleteall' %>
 <br>
 <h2>Create New Product</h2>
@@ -39,6 +41,12 @@
   <br>
   <%= f.submit "Create" %>
 <% end %>
+
+<br>
+
+<p><%= Shopify.products() %></p>
+
+<p><%= @shopify.products() %></p>
 
 <!-- <h2>Webhooks</h2>
 

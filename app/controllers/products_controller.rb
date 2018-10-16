@@ -1,4 +1,9 @@
+require "httparty"
+require "net/http"
+require "uri"
+
 class ProductsController < ShopifyApp::AuthenticatedController
+  include HTTParty
 
   def new
     product = ShopifyAPI::Product.new
@@ -125,6 +130,10 @@ class ProductsController < ShopifyApp::AuthenticatedController
       new_product.save
     end
     redirect_to root_path
+  end
+
+  def generateone
+    uri = URI.parse("")
   end
 
   def deleteall
