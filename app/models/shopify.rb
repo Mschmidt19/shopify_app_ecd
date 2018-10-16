@@ -1,11 +1,13 @@
 module Shopify
   require 'uri'
   require 'net/http'
+  require 'net/https'
 
   def self.products
     url = URI("https://marekecdteststore.myshopify.com/admin/products.json")
 
-    http = Net::HTTP.new(url.host, url.port)
+    http = Net::HTTP.new(url.host, 443)
+    http.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
     request["cache-control"] = 'no-cache'
