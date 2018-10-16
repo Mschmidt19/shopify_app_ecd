@@ -10,6 +10,7 @@ module Shopify
     http.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
+    request.basic_auth ENV["API_KEY"], ENV["API_PASSWORD"]
     request["cache-control"] = 'no-cache'
     request["Postman-Token"] = '92b03b7b-8a7c-4794-afe3-166eb5bead2c'
 
