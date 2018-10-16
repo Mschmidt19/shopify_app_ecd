@@ -23,8 +23,16 @@
 <%= form_with url: '/products/new' do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
+  <br>
   <%= f.label :product_type %>
   <%= f.text_field :product_type %>
+  <br>
+  <%= f.label :sizes %>
+  <%= f.text_field :sizes, placeholder: "S, M, L" %>
+  <br>
+  <%= f.label :colors %>
+  <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
+  <br>
   <%= f.submit "Create" %>
 <% end %>
 
