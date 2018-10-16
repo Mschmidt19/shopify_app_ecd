@@ -17,7 +17,7 @@
 
 <a href='products/generateall'><h2>Generate All Products</h2></a>
 <br>
-<a href='/products/deleteall'><h2>Delete All Products</h2></a>
+<%= button_to 'Delete all products', '/products/deleteall' %>
 <br>
 <h2>Create New Product</h2>
 <%= form_with url: '/products/new' do |f| %>

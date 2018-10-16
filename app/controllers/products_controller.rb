@@ -18,7 +18,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
     @products.each do |product|
       product.destroy
     end
-    redirect_to root_path
+    redirect_to root_path1
   end
 
 end
