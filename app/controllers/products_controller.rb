@@ -1,9 +1,9 @@
 class ProductsController < ShopifyApp::AuthenticatedController
 
   def new
-    @product = ShopifyAPI::Product.new
-    @product.title = params[:title]
-    @product.product_type = params[:product_type]
+    product = ShopifyAPI::Product.new
+    product.title = params[:title]
+    product.product_type = params[:product_type]
     sizes = params[:sizes].split(/\s*,\s*/)
     colors = params[:colors].split(/\s*,\s*/)
     variants = []
@@ -16,8 +16,8 @@ class ProductsController < ShopifyApp::AuthenticatedController
         variants.push(variant)
       end
     end
-    @product.variants = variants
-    @product.options = [
+    product.variants = variants
+    product.options = [
       {
         "name": "Size",
         "values": sizes
@@ -27,9 +27,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
         "values": colors
       }
     ]
-    # @product.variants = [{"option1": "Blue", "option2": "155"}, {"option1": "Black", "option2": "159"}]
-    # @product.options = [{"name": "Color", "values": ["Blue", "Black"]}, {"name": "Size", "values": ["155", "159"]}]
-    if @product.save
+    if product.save
       redirect_to root_path
     end
   end
@@ -126,6 +124,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       ]
       new_product.save
     end
+    redirect_to root_path
   end
 
   def deleteall
