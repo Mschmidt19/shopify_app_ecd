@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   post '/products/new' => 'products#new'
 
-  post '/products/new2' => 'ProductsController#new2'
+  post '/products/new2' => 'products#new2'
 end
