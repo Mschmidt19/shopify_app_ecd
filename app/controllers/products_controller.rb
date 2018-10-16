@@ -14,11 +14,8 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def deleteall
-    @products = ShopifyAPI::product.find(:all)
-    @products.each do |product|
-      product.destroy
-    end
-    redirect_to root_path1
+    @products = ShopifyAPI::product.destroy(:all)
+
   end
 
 end
