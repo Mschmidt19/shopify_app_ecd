@@ -61,7 +61,7 @@
 <p><%= Shopify.products() %></p>
 <br><br><br><br><br> -->
 <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}) %></p><br><br>
-<p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).attributes %></p><br><br
+<!-- <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).attributes %></p><br><br -->
 <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.attributes %></p><br><br>
 <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first %></p><br><br>
 <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.title %></p>
