@@ -85,7 +85,6 @@ class ProductsController < ShopifyApp::AuthenticatedController
           end
           rails_product = Product.create(hash)
           rails_product.variants.create(variant_hash_array)
-          redirect_to root_path
         end
         puts `Processing page #{page} of #{total_pages}`
         page += 1
