@@ -100,7 +100,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
     end
   end
 
-  def delete_all_from_database
+  def destroy_all_from_database
     Product.destroy_all
   end
 
