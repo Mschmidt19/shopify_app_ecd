@@ -3,6 +3,10 @@ html body {
   padding-right: 2%;
 }
 
+.centered {
+  text-align: center;
+}
+
 .column {
     float: left;
     width: 47%;

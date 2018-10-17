@@ -6,38 +6,26 @@
   </script>
 <% end %>
 
-<div class="row">
-
-  <div class="column left">
+<div class="row centered">
+  <h2>Create a New Product</h2>
+  <%= form_with url: '/products/new' do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
     <br>
-    <%= button_to "Save all products to database", '/products/save_to_database' %>
+    <%= f.label :product_type %>
+    <%= f.text_field :product_type %>
     <br>
-    <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
     <br>
-  </div>
-
-  <div class="column right">
-    <h2>Create a New Product</h2>
-    <%= form_with url: '/products/new' do |f| %>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-      <br>
-      <%= f.label :product_type %>
-      <%= f.text_field :product_type %>
-      <br>
-      <%= f.label :price %>
-      <%= f.text_field :price %>
-      <br>
-      <%= f.label :sizes %>
-      <%= f.text_field :sizes, placeholder: "S, M, L" %>
-      <br>
-      <%= f.label :colors %>
-      <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
-      <br>
-      <%= f.submit "Create" %>
-    <% end %>
-  </div>
-
+    <%= f.label :sizes %>
+    <%= f.text_field :sizes, placeholder: "S, M, L" %>
+    <br>
+    <%= f.label :colors %>
+    <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
+    <br>
+    <%= f.submit "Create" %>
+  <% end %>
 </div>
 
 <br><br>
@@ -45,7 +33,20 @@
 <br><br>
 
 <div class="row">
+  <div class="column left centered">
+    <%= button_to "Save all products to database", '/products/save_to_database' %>
+  </div>
 
+  <div class="column right centered">
+    <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
+  </div>
+</div>
+
+<br><br>
+<hr>
+<br><br>
+
+<div class="row">
   <div class="column left">
     <h2>Products from shopify</h2>
     <ul>
@@ -68,5 +69,4 @@
       <% end %>
     </ol>
   </div>
-
 </div>
