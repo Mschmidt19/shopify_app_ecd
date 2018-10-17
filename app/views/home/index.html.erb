@@ -8,7 +8,7 @@
 <h2>Products</h2>
 
 <ul>
-  <% Shopify.products.each do |product| %>
+  <% @products.each do |product| %>
     <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
   <% end %>
 </ul>
@@ -19,10 +19,10 @@
 <%= button_to "Test2", nil, {:onclick => "alert('testing alert2')"} %><br>
 <%= button_to "Test3", :onclick => "alert('testing alert3')" %><br>
 <%= submit_tag "Test4", :onclick => "alert('testing alert4')" %><br>
-<%= submit_tag "Test5", :onclick => Shopify.test_alert() %><br>
+<!-- <%= submit_tag "Test5", :onclick => Shopify.test_alert() %><br>
 <%= submit_tag "Test6", :onclick => Shopify.test_alert %><br>
 <%= button_to "Test7", nil, {onclick: Shopify.test_alert()} %><br>
-<%= button_to "Test8", nil, {onclick: Shopify.test_alert} %><br>
+<%= button_to "Test8", nil, {onclick: Shopify.test_alert} %><br> -->
 
 <br>
 <h2>Create New Product</h2>
