@@ -51,33 +51,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         products += new_products
         new_products.each do |new_product|
-          # rails_product = Product.create()
-          # rails_product.shopify_id = new_product["id"]
-          # rails_product.title = new_product["title"]
-          # rails_product.shopify_created_at = new_product["created_at"]
-          # rails_product.shopify_updated_at = new_product["updated_at"]
-          # rails_product.shopify_published_at = new_product["published_at"]
-          # rails_product.body_html = new_product["body_html"]
-          # rails_product.handle = new_product["handle"]
-          # rails_product.product_type = new_product["product_type"]
-          # rails_product.tags = new_product["tags"]
-          # rails_product.vendor = new_product["vendor"]
-          # rails_product.save
-          # new_product["variants"].each do |new_variant|
-          #   rails_variant = rails_product.variants.create()
-          #   rails_variant.shopify_id = new_variant["id"]
-          #   rails_variant.shopify_product_id = new_variant["product_id"]
-
-          # end
-
-          new_product["shopify_id"] = new_product.delete("id")
-          new_product["shopify_created_at"] = new_product.delete("created_at")
-          new_product["shopify_updated_at"] = new_product.delete("updated_at")
-          new_product["shopify_published_at"] = new_product.delete("published_at")
-          rails_product = Product.create(new_product)
-          if rails_product.save
-            redirect_to root_path
-          end
+          self.save_another_to_database(new_product)
         end
         puts `Processing page #{page} of #{total_pages}`
         page += 1
@@ -86,44 +60,25 @@ class ProductsController < ShopifyApp::AuthenticatedController
     end
   end
 
-  def save_one_to_database
-    # new_product = ShopifyAPI::Product.all(:params => {:limit => 1}).first
-    # puts new_product
-    # new_product.delete("template_suffix")
-    # new_product.delete("published_scope")
-    # new_product.delete("admin_graphql_api_id")
-    # new_product.delete("options")
-    # new_product.delete("images")
-    # new_product.delete("image")
-    # new_product.delete("variants")
-    # new_product["shopify_id"] = new_product.delete("id")
-    # new_product["shopify_created_at"] = new_product.delete("created_at")
-    # new_product["shopify_updated_at"] = new_product.delete("updated_at")
-    # new_product["shopify_published_at"] = new_product.delete("published_at")
-    # rails_product = Product.create(new_product)
-    test_product = {
-      "shopify_id": 1671288356934,
-      "title": "Khaki Shorts",
-      "body_html": nil,
-      "vendor": "MarekECDTestStore",
-      "product_type": "Bottoms",
-      "shopify_created_at": "2018-10-15T23:08:38-04:00",
-      "handle": "khaki-shorts",
-      "shopify_updated_at": "2018-10-15T23:08:40-04:00",
-      "shopify_published_at": "2018-10-15T23:08:38-04:00",
-      "tags": ""
+  def save_another_to_database(product)
+    new_product = product
+    hash = {
+      "shopify_id": new_product.id,
+      "title": new_product.title,
+      "body_html": new_product.body_html,
+      "vendor": new_product.vendor,
+      "product_type": new_product.product_type,
+      "shopify_created_at": new_product.created_at,
+      "handle": new_product.handle,
+      "shopify_updated_at": new_product.updated_at,
+      "shopify_published_at": new_product.published_at,
+      "tags": new_product.tags
     }
-    # test_product["shopify_id"] = test_product.delete("id")
-    # test_product["shopify_created_at"] = test_product.delete("created_at")
-    # test_product["shopify_updated_at"] = test_product.delete("updated_at")
-    # test_product["shopify_published_at"] = test_product.delete("published_at")
-    rails_product = Product.create(test_product)
-    if rails_product.save
-      redirect_to root_path
-    end
+    rails_product = Product.create(hash)
+    rails.save
   end
 
-  def save_another_to_database
+  def save_one_to_database
     new_product = ShopifyAPI::Product.all(:params => {:limit => 1}).first
     hash = {
       "shopify_id": new_product.id,
