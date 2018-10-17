@@ -47,7 +47,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
         total_pages += 1
       end
       page = 1
-      while page < total_pages
+      while page <= total_pages
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         hashes = []
         new_products.each do |new_product|
