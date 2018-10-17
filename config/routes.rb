@@ -9,5 +9,5 @@ Rails.application.routes.draw do
 
   post '/products/save_one_to_database' => 'products#save_one_to_database'
 
-  post '/products/save_another_to_database' => 'products#save_another_to_database'
+  post '/products/save_five_to_database' => 'products#save_five_to_database'
 end
