@@ -15,9 +15,13 @@ module Shopify
     request["Postman-Token"] = '92b03b7b-8a7c-4794-afe3-166eb5bead2c'
 
     response = http.request(request)
-    puts response.read_body
 
     return response.read_body
   end
+
+  def self.test_alert
+    window.alert("testing alert function")
+  end
+
 
 end
