@@ -50,7 +50,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       while page <= total_pages
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         new_products.each do |new_product|
-          if !Product.exists?(shopify_id: new_product.id) == false)
+          if !Product.exists?(shopify_id: new_product.id)
             hash = {
               "shopify_id": new_product.id,
               "title": new_product.title,
