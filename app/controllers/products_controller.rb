@@ -87,20 +87,37 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def save_one_to_database
-    new_product = ShopifyAPI::Product.all(:params => {:limit => 1}).first
-    puts new_product
-    new_product.delete("template_suffix")
-    new_product.delete("published_scope")
-    new_product.delete("admin_graphql_api_id")
-    new_product.delete("options")
-    new_product.delete("images")
-    new_product.delete("image")
-    new_product.delete("variants")
-    new_product["shopify_id"] = new_product.delete("id")
-    new_product["shopify_created_at"] = new_product.delete("created_at")
-    new_product["shopify_updated_at"] = new_product.delete("updated_at")
-    new_product["shopify_published_at"] = new_product.delete("published_at")
-    rails_product = Product.create(new_product)
+    # new_product = ShopifyAPI::Product.all(:params => {:limit => 1}).first
+    # puts new_product
+    # new_product.delete("template_suffix")
+    # new_product.delete("published_scope")
+    # new_product.delete("admin_graphql_api_id")
+    # new_product.delete("options")
+    # new_product.delete("images")
+    # new_product.delete("image")
+    # new_product.delete("variants")
+    # new_product["shopify_id"] = new_product.delete("id")
+    # new_product["shopify_created_at"] = new_product.delete("created_at")
+    # new_product["shopify_updated_at"] = new_product.delete("updated_at")
+    # new_product["shopify_published_at"] = new_product.delete("published_at")
+    # rails_product = Product.create(new_product)
+    test_product = {
+      "id": 1671288356934,
+      "title": "Khaki Shorts",
+      "body_html": null,
+      "vendor": "MarekECDTestStore",
+      "product_type": "Bottoms",
+      "created_at": "2018-10-15T23:08:38-04:00",
+      "handle": "khaki-shorts",
+      "updated_at": "2018-10-15T23:08:40-04:00",
+      "published_at": "2018-10-15T23:08:38-04:00",
+      "tags": ""
+    }
+    test_product["shopify_id"] = test_product.delete("id")
+    test_product["shopify_created_at"] = test_product.delete("created_at")
+    test_product["shopify_updated_at"] = test_product.delete("updated_at")
+    test_product["shopify_published_at"] = test_product.delete("published_at")
+    rails_product = Product.create(test_product)
     if rails_product.save
       redirect_to root_path
     end
