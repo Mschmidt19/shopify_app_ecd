@@ -7,38 +7,46 @@
 <% end %>
 
 <div class="row">
-  <br>
-  <%= button_to "Save products to database", '/products/save_to_database' %>
-  <br>
-  <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
-  <br>
 
-  <h2>Create New Product</h2>
-  <%= form_with url: '/products/new' do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="column left">
     <br>
-    <%= f.label :product_type %>
-    <%= f.text_field :product_type %>
+    <%= button_to "Save all products to database", '/products/save_to_database' %>
     <br>
-    <%= f.label :price %>
-    <%= f.text_field :price %>
+    <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
     <br>
-    <%= f.label :sizes %>
-    <%= f.text_field :sizes, placeholder: "S, M, L" %>
-    <br>
-    <%= f.label :colors %>
-    <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
-    <br>
-    <%= f.submit "Create" %>
-  <% end %>
+  </div>
 
-  <hr>
+  <div class="column right">
+    <h2>Create a New Product</h2>
+    <%= form_with url: '/products/new' do |f| %>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+      <br>
+      <%= f.label :product_type %>
+      <%= f.text_field :product_type %>
+      <br>
+      <%= f.label :price %>
+      <%= f.text_field :price %>
+      <br>
+      <%= f.label :sizes %>
+      <%= f.text_field :sizes, placeholder: "S, M, L" %>
+      <br>
+      <%= f.label :colors %>
+      <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
+      <br>
+      <%= f.submit "Create" %>
+    <% end %>
+  </div>
+
 </div>
+
+<br><br>
+<hr>
+<br><br>
 
 <div class="row">
 
-  <div class="column green">
+  <div class="column left">
     <h2>Products from shopify</h2>
     <ul>
       <% @products.each do |product| %>
@@ -47,8 +55,8 @@
     </ul>
   </div>
 
-  <div class="column blue">
-    <h2>Products from Rails</h2>
+  <div class="column right">
+    <h2>Products from rails</h2>
     <ol>
       <% @products_from_rails.each do |product| %>
         <li><%= product.title %></li>
