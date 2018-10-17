@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   post '/products/new' => 'products#new'
 
   post '/products/save_to_database' => 'products#save_to_database'
+
+  post '/products/save_one_to_database' => 'products#save_one_to_database'
 end

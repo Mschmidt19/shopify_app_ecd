@@ -70,6 +70,10 @@ class ProductsController < ShopifyApp::AuthenticatedController
 
           # end
 
+          new_product["shopify_id"] = new_product.delete("id")
+          new_product["shopify_created_at"] = new_product.delete("created_at")
+          new_product["shopify_updated_at"] = new_product.delete("updated_at")
+          new_product["shopify_published_at"] = new_product.delete("published_at")
           rails_product = Product.create(new_product)
           if rails_product.save
             redirect_to root_path
@@ -79,6 +83,13 @@ class ProductsController < ShopifyApp::AuthenticatedController
         page += 1
       end
       puts `Finished - processed #{products.count} products`
+    end
+  end
+
+  def save_one_to_database
+    rails_product = Product.create({"title": "Test Product", "shopify_id": "123456789"})
+    if rails_product.save
+      redirect_to root_path
     end
   end
 
