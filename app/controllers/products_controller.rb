@@ -102,21 +102,21 @@ class ProductsController < ShopifyApp::AuthenticatedController
     # new_product["shopify_published_at"] = new_product.delete("published_at")
     # rails_product = Product.create(new_product)
     test_product = {
-      "id": 1671288356934,
+      "shopify_id": 1671288356934,
       "title": "Khaki Shorts",
       "body_html": nil,
       "vendor": "MarekECDTestStore",
       "product_type": "Bottoms",
-      "created_at": "2018-10-15T23:08:38-04:00",
+      "shopify_created_at": "2018-10-15T23:08:38-04:00",
       "handle": "khaki-shorts",
       "updated_at": "2018-10-15T23:08:40-04:00",
-      "published_at": "2018-10-15T23:08:38-04:00",
+      "shopify_published_at": "2018-10-15T23:08:38-04:00",
       "tags": ""
     }
-    test_product["shopify_id"] = test_product.delete("id")
-    test_product["shopify_created_at"] = test_product.delete("created_at")
-    test_product["shopify_updated_at"] = test_product.delete("updated_at")
-    test_product["shopify_published_at"] = test_product.delete("published_at")
+    # test_product["shopify_id"] = test_product.delete("id")
+    # test_product["shopify_created_at"] = test_product.delete("created_at")
+    # test_product["shopify_updated_at"] = test_product.delete("updated_at")
+    # test_product["shopify_published_at"] = test_product.delete("published_at")
     rails_product = Product.create(test_product)
     if rails_product.save
       redirect_to root_path
