@@ -123,6 +123,25 @@ class ProductsController < ShopifyApp::AuthenticatedController
     end
   end
 
+  def save_another_to_database
+    new_product = Shopify.products["products"].first
+    new_product.delete("template_suffix")
+    new_product.delete("published_scope")
+    new_product.delete("admin_graphql_api_id")
+    new_product.delete("options")
+    new_product.delete("images")
+    new_product.delete("image")
+    new_product.delete("variants")
+    new_product["shopify_id"] = test_product.delete(:"id")
+    new_product["shopify_created_at"] = new_product.delete(:"created_at")
+    new_product["shopify_updated_at"] = new_product.delete(:"updated_at")
+    new_product["shopify_published_at"] = new_product.delete(:"published_at")
+    rails_product = Product.create(new_product)
+    if rails_product.save
+      redirect_to root_path
+    end
+  end
+
   private
 
   def product_params

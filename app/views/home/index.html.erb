@@ -20,6 +20,8 @@
 <br>
   <%= button_to "Save test product to database", '/products/save_one_to_database' %>
 <br>
+<%= button_to "Save another test product to database", '/products/save_another_to_database' %>
+<br>
 
 <h2>Create New Product</h2>
 <%= form_with url: '/products/new' do |f| %>
@@ -54,7 +56,7 @@
 <br>
 <br>
 <br>
-<p><%= @products %></p>
+<p><%= Shopify.products["products"].first %></p>
 
 <!-- <h2>Webhooks</h2>
 
