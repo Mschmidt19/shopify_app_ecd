@@ -36,6 +36,10 @@ class ProductsController < ShopifyApp::AuthenticatedController
     Product.destroy_all
   end
 
+  def destroy_all_from_database
+    Product.destroy_all
+  end
+
   def save_to_database
     items_per_page = 5
     products = []

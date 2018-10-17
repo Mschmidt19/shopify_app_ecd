@@ -7,9 +7,11 @@
 <% end %>
 
 <br>
-  <%= button_to "Save products to database", '/products/save_to_database' %>
+<%= button_to "Save products to database", '/products/save_to_database' %>
 <br>
-  <%= button_to "Delete all products from database", '/products/destroy_all' %>
+<%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
+<br>
+<%= button_to "Delete all products from database", '/destroy_all' %>
 <br>
 
 <h2>Create New Product</h2>
@@ -54,5 +56,3 @@
     </ul>
   <% end %>
 </ol>
-
-<div style="background-color: red; width: 400px; height: 400px;"></div>
