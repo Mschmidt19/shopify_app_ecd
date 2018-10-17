@@ -89,6 +89,13 @@ class ProductsController < ShopifyApp::AuthenticatedController
   def save_one_to_database
     new_product = ShopifyAPI::Product.all(:params => {:limit => 1}).first
     puts new_product
+    new_product.delete("template_suffix")
+    new_product.delete("published_scope")
+    new_product.delete("admin_graphql_api_id")
+    new_product.delete("options")
+    new_product.delete("images")
+    new_product.delete("image")
+    new_product.delete("variants")
     new_product["shopify_id"] = new_product.delete("id")
     new_product["shopify_created_at"] = new_product.delete("created_at")
     new_product["shopify_updated_at"] = new_product.delete("updated_at")
