@@ -34,6 +34,10 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def create
+
+  end
+
+  def save_to_database
     items_per_page = 5
     products = []
     count = ShopifyAPI::Product.count
@@ -80,11 +84,6 @@ class ProductsController < ShopifyApp::AuthenticatedController
 
   def product_params
     params.require(:product).permit(:shopify_id, :title, :shopify_created_at, :shopify_updated_at, :shopify_published_at, :body_html, :handle, :product_type, :tags, :vendor)
-  end
-
-  def save_to_database
-    Shopify.save_to_database
-    redirect_to root_path
   end
 
 end
