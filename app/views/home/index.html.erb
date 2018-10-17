@@ -59,19 +59,19 @@
 </ol>
 
 <br>
-
+<p><%= Product.where(shopify_id: 1677021872198) %></p>
 <br>
+<ul>
+  <% Product.where(shopify_id: 1677021872198).variants.each do |variant| %>
+    <li><%= variant.title %></li>
+  <% end %>
+</ul>
 <br>
 <br>
 <!-- <p><%= (Shopify.products())["products"].first %></p><br><br>
 <p><%= (Shopify.products())["products"] %></p><br><br>
 <p><%= Shopify.products() %></p>
 <br><br><br><br><br> -->
-<!-- <ul>
-  <% ShopifyAPI::Product.all(:params => {:limit => 1}).first.variants.each do |variant| %>
-    <li><%= variant.title %></li>
-  <% end %>
-</ul><br><br> -->
 <!-- <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first %></p><br><br>
 <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.title %></p> -->
 

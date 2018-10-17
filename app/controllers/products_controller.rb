@@ -50,7 +50,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       while page <= total_pages
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         new_products.each do |new_product|
-          if (Product.exists?(shopify_id: new_product.id) == false)
+          if !Product.exists?(shopify_id: new_product.id)
             hash = {
               "shopify_id": new_product.id,
               "title": new_product.title,
@@ -69,7 +69,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
           end
           variant_hash_array = []
           new_product.variants.each do |variant|
-            if (Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id) == false)
+            if !Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id)
               variant_hash = {
                 "shopify_id": variant.id,
                 "shopify_product_id": variant.product_id,
