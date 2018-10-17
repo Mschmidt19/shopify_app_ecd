@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   post '/products/save_to_database' => 'products#save_to_database'
 
-  post '/products/destroy_all_from_database' => 'products#destroy_all_from_database'
+  post '/products/destroy_all' => 'products#destroy_all'
 end

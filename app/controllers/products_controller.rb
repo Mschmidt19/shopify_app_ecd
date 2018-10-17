@@ -1,5 +1,4 @@
 class ProductsController < ShopifyApp::AuthenticatedController
-  include Shopify
 
   def new
     product = ShopifyAPI::Product.new
@@ -33,8 +32,8 @@ class ProductsController < ShopifyApp::AuthenticatedController
     end
   end
 
-  def create
-    Product.create(product_params)
+  def destroy_all
+    Product.destroy_all
   end
 
   def save_to_database
@@ -98,10 +97,6 @@ class ProductsController < ShopifyApp::AuthenticatedController
       puts `Finished - processed #{products.count} products`
       redirect_to root_path
     end
-  end
-
-  def destroy_all_from_database
-    Product.destroy_all
   end
 
   # def save_one_to_database
