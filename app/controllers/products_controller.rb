@@ -50,41 +50,45 @@ class ProductsController < ShopifyApp::AuthenticatedController
       while page <= total_pages
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         new_products.each do |new_product|
-          hash = {
-            "shopify_id": new_product.id,
-            "title": new_product.title,
-            "body_html": new_product.body_html,
-            "vendor": new_product.vendor,
-            "product_type": new_product.product_type,
-            "shopify_created_at": new_product.created_at,
-            "handle": new_product.handle,
-            "shopify_updated_at": new_product.updated_at,
-            "shopify_published_at": new_product.published_at,
-            "tags": new_product.tags
-          }
+          if (Product.exists?(shopify_id: new_product.id) == false)
+            hash = {
+              "shopify_id": new_product.id,
+              "title": new_product.title,
+              "body_html": new_product.body_html,
+              "vendor": new_product.vendor,
+              "product_type": new_product.product_type,
+              "shopify_created_at": new_product.created_at,
+              "handle": new_product.handle,
+              "shopify_updated_at": new_product.updated_at,
+              "shopify_published_at": new_product.published_at,
+              "tags": new_product.tags
+            }
+            rails_product = Product.create(hash)
+          end
           variant_hash_array = []
           new_product.variants.each do |variant|
-            variant_hash = {
-              "shopify_id": variant.id,
-              "shopify_product_id": variant.product_id,
-              "title": variant.title,
-              "shopify_created_at": variant.created_at,
-              "shopify_updated_at": variant.updated_at,
-              "price": variant.price,
-              "sku": variant.sku,
-              "option1": variant.option1,
-              "option2": variant.option2,
-              "option3": variant.option3,
-              "position": variant.position,
-              "taxable": variant.taxable,
-              "weight": variant.weight,
-              "weight_unit": variant.weight_unit,
-              "inventory_quantity": variant.inventory_quantity
-            }
-            variant_hash_array.push(variant_hash)
+            if (Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id) == false)
+              variant_hash = {
+                "shopify_id": variant.id,
+                "shopify_product_id": variant.product_id,
+                "title": variant.title,
+                "shopify_created_at": variant.created_at,
+                "shopify_updated_at": variant.updated_at,
+                "price": variant.price,
+                "sku": variant.sku,
+                "option1": variant.option1,
+                "option2": variant.option2,
+                "option3": variant.option3,
+                "position": variant.position,
+                "taxable": variant.taxable,
+                "weight": variant.weight,
+                "weight_unit": variant.weight_unit,
+                "inventory_quantity": variant.inventory_quantity
+              }
+              variant_hash_array.push(variant_hash)
+            end
           end
-          rails_product = Product.create(hash)
-          rails_product.variants.create(variant_hash_array)
+          rails_product.variants.create(variant_hash_array) unless variant_hash_array.empty?
         end
         puts `Processing page #{page} of #{total_pages}`
         page += 1
