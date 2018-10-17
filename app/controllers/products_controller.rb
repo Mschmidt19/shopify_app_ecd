@@ -49,27 +49,28 @@ class ProductsController < ShopifyApp::AuthenticatedController
       page = 1
       while page < total_pages
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
-        products += new_products
+        hashes = []
         new_products.each do |new_product|
           hash = {
             "shopify_id": new_product.id,
             "title": new_product.title,
+            "body_html": new_product.body_html,
+            "vendor": new_product.vendor,
+            "product_type": new_product.product_type,
             "shopify_created_at": new_product.created_at,
+            "handle": new_product.handle,
             "shopify_updated_at": new_product.updated_at,
             "shopify_published_at": new_product.published_at,
-            "body_html": new_product.body_html,
-            "handle": new_product.handle,
-            "product_type": new_product.product_type,
-            "tags": new_product.tags,
-            "vendor": new_product.vendor
+            "tags": new_product.tags
           }
-          rails_product = Product.create(hash)
-          rails_product.save
+          hashes.push(hash)
         end
+        rails_product = Product.create(hashes)
         puts `Processing page #{page} of #{total_pages}`
         page += 1
       end
       puts `Finished - processed #{products.count} products`
+      redirect_to root_path
     end
   end
 
