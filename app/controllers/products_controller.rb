@@ -64,6 +64,8 @@ class ProductsController < ShopifyApp::AuthenticatedController
               "tags": new_product.tags
             }
             rails_product = Product.create(hash)
+          else
+            rails_product = Product.where(shopify_id: new_product.id)
           end
           variant_hash_array = []
           new_product.variants.each do |variant|
