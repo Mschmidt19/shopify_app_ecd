@@ -13,6 +13,16 @@
 ActiveRecord::Schema.define(version: 2018_10_17_005723) do
 
   create_table "products", force: :cascade do |t|
+    t.integer "shopify_id", null: false
+    t.string "title", null: false
+    t.string "shopify_created_at"
+    t.string "shopify_updated_at"
+    t.string "shopify_published_at"
+    t.text "body_html"
+    t.string "handle"
+    t.string "product_type"
+    t.text "tags"
+    t.string "vendor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
