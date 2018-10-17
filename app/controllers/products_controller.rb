@@ -104,7 +104,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
     test_product = {
       "id": 1671288356934,
       "title": "Khaki Shorts",
-      "body_html": null,
+      "body_html": nil,
       "vendor": "MarekECDTestStore",
       "product_type": "Bottoms",
       "created_at": "2018-10-15T23:08:38-04:00",
