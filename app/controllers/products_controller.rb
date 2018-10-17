@@ -95,7 +95,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def save_five_to_database
-    products = ShopifyAPI::Product.all(:params => {:limit => 5})
+    products = ShopifyAPI::Product.all(:params => {:page => 2, :limit => 5})
     hashes = []
     products.each do |new_product|
       hash = {
