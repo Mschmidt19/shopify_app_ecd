@@ -109,7 +109,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       "product_type": "Bottoms",
       "shopify_created_at": "2018-10-15T23:08:38-04:00",
       "handle": "khaki-shorts",
-      "updated_at": "2018-10-15T23:08:40-04:00",
+      "shopify_updated_at": "2018-10-15T23:08:40-04:00",
       "shopify_published_at": "2018-10-15T23:08:38-04:00",
       "tags": ""
     }
@@ -124,20 +124,20 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def save_another_to_database
-    new_products = Shopify.products()
-    new_product = new_products["products"].first
-    new_product.delete("template_suffix")
-    new_product.delete("published_scope")
-    new_product.delete("admin_graphql_api_id")
-    new_product.delete("options")
-    new_product.delete("images")
-    new_product.delete("image")
-    new_product.delete("variants")
-    new_product["shopify_id"] = new_product.delete(:"id")
-    new_product["shopify_created_at"] = new_product.delete(:"created_at")
-    new_product["shopify_updated_at"] = new_product.delete(:"updated_at")
-    new_product["shopify_published_at"] = new_product.delete(:"published_at")
-    rails_product = Product.create(new_product)
+    new_product = ShopifyAPI::Product.all(:params => {:limit => 1}).first
+    hash = {
+      "shopify_id": new_product.id,
+      "title": new_product.title,
+      "body_html": new_product.body_html,
+      "vendor": new_product.vendor,
+      "product_type": new_product.product_type,
+      "shopify_created_at": new_product.created_at,
+      "handle": new_product.handle,
+      "shopify_updated_at": new_product.updated_at,
+      "shopify_published_at": new_product.published_at,
+      "tags": new_product.tags
+    }
+    rails_product = Product.create(hash)
     if rails_product.save
       redirect_to root_path
     end
