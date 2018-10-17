@@ -1,48 +1,26 @@
-require "httparty"
-require "net/http"
-require "uri"
-
 class ProductsController < ShopifyApp::AuthenticatedController
-  include HTTParty
+  include Shopify
 
   def new
-    product = ShopifyAPI::Product.new
-    product.title = params[:title]
-    product.product_type = params[:product_type]
-    sizes = params[:sizes].split(/\s*,\s*/)
-    colors = params[:colors].split(/\s*,\s*/)
-    variants = []
-    sizes.each do |size|
-      colors.each do |color|
-        variant = {}
-        variant["option1"] = size
-        variant["option2"] = color
-        variant["price"] = params[:price]
-        variants.push(variant)
-      end
-    end
-    product.variants = variants
-    product.options = [
-      {
-        "name": "Size",
-        "values": sizes
-      },
-      {
-        "name": "Color",
-        "values": colors
-      }
-    ]
-    if product.save
+    if Shopify.new_product
       redirect_to root_path
     end
   end
 
-  def generateone
-    uri = URI.parse("")
+  def create
+    @product = Product.create(product_params)
+    @product.save
+    redirect_to root_path
   end
 
-  def deleteall
-    ShopifyAPI::Product.find(10).destroy
+  private
+
+  def product_params
+    params.require(:product).permit(:shopify_id, :title, :shopify_created_at, :shopify_updated_at, :shopify_published_at, :body_html, :handle, :product_type, :tags, :vendor)
+  end
+
+  def save_to_database
+    Shopify.save_to_database
     redirect_to root_path
   end
 

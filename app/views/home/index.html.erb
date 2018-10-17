@@ -15,16 +15,10 @@
 
 <hr>
 
-<%= button_to "Test", nil, {onclick: "alert('testing alert1')"} %><br>
-<%= button_to "Test2", nil, {:onclick => "alert('testing alert2')"} %><br>
-<%= button_to "Test3", :onclick => "alert('testing alert3')" %><br>
-<%= submit_tag "Test4", :onclick => "alert('testing alert4')" %><br>
-<!-- <%= submit_tag "Test5", :onclick => Shopify.test_alert() %><br>
-<%= submit_tag "Test6", :onclick => Shopify.test_alert %><br>
-<%= button_to "Test7", nil, {onclick: Shopify.test_alert()} %><br>
-<%= button_to "Test8", nil, {onclick: Shopify.test_alert} %><br> -->
-
 <br>
+  <%= button_to '/products/save_to_database' %>
+<br>
+
 <h2>Create New Product</h2>
 <%= form_with url: '/products/new' do |f| %>
   <%= f.label :title %>
@@ -44,6 +38,17 @@
   <br>
   <%= f.submit "Create" %>
 <% end %>
+
+<hr>
+
+<h2>Products from Rails</h2>
+
+<ul>
+  <% @products_from_rails.each do |product| %>
+    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
+  <% end %>
+</ul>
+
 <!-- <h2>Webhooks</h2>
 
 <% if @webhooks.present? %>
