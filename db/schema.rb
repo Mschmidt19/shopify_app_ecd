@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 2018_10_17_005723) do
     t.string "title"
     t.string "shopify_created_at"
     t.string "shopify_updated_at"
-    t.string "shopify_published_at"
     t.string "price"
     t.string "sku"
     t.string "option1"

@@ -99,7 +99,6 @@ class ProductsController < ShopifyApp::AuthenticatedController
         "title": variant.title,
         "shopify_created_at": variant.created_at,
         "shopify_updated_at": variant.updated_at,
-        "shopify_published_at": variant.published_at,
         "price": variant.price,
         "sku": variant.sku,
         "option1": variant.option1,
