@@ -1,62 +1,64 @@
-<% content_for :javascript do %>
-  <script type="text/javascript">
-    ShopifyApp.ready(function(){
-      ShopifyApp.Bar.initialize({ title: "Home" });
-    });
-  </script>
-<% end %>
-
-<br>
-  <%= button_to "Save products to database", '/products/save_to_database' %>
-<br>
-  <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
-<br>
-
-<h2>Create New Product</h2>
-<%= form_with url: '/products/new' do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <br>
-  <%= f.label :product_type %>
-  <%= f.text_field :product_type %>
-  <br>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <br>
-  <%= f.label :sizes %>
-  <%= f.text_field :sizes, placeholder: "S, M, L" %>
-  <br>
-  <%= f.label :colors %>
-  <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
-  <br>
-  <%= f.submit "Create" %>
-<% end %>
-
-<hr>
-
-<h2>Products from shopify</h2>
-
-<ul>
-  <% @products.each do |product| %>
-    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
+<div class="row">
+  <% content_for :javascript do %>
+    <script type="text/javascript">
+      ShopifyApp.ready(function(){
+        ShopifyApp.Bar.initialize({ title: "Home" });
+      });
+    </script>
   <% end %>
-</ul>
 
-<hr>
+  <br>
+    <%= button_to "Save products to database", '/products/save_to_database' %>
+  <br>
+    <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
+  <br>
 
-<h2>Products from Rails</h2>
+  <h2>Create New Product</h2>
+  <%= form_with url: '/products/new' do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br>
+    <%= f.label :product_type %>
+    <%= f.text_field :product_type %>
+    <br>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+    <br>
+    <%= f.label :sizes %>
+    <%= f.text_field :sizes, placeholder: "S, M, L" %>
+    <br>
+    <%= f.label :colors %>
+    <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
+    <br>
+    <%= f.submit "Create" %>
+  <% end %>
 
-<ol>
-  <% @products_from_rails.each do |product| %>
-    <li><%= product.title %></li>
+  <hr>
+</div>
+
+<div class="row">
+
+<div class="column green">
+    <h2>Products from shopify</h2>
     <ul>
-      <% product.variants.each do |variant| %>
-        <li><%= variant.title %></li>
+      <% @products.each do |product| %>
+        <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
       <% end %>
     </ul>
-  <% end %>
-</ol>
+  </div>
 
-<br>
+  <div class="column blue">
+    <h2>Products from Rails</h2>
+    <ol>
+      <% @products_from_rails.each do |product| %>
+        <li><%= product.title %></li>
+        <ul>
+          <% product.variants.each do |variant| %>
+            <li><%= variant.title %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ol>
+  </div>
 
-<br>
+</div>
