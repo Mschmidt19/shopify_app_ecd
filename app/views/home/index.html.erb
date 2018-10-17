@@ -18,7 +18,7 @@
 <br>
   <%= button_to "Save products to database", '/products/save_to_database' %>
 <br>
-  <%= button_to "Save tes product to database", '/products/save_one_to_database' %>
+  <%= button_to "Save test product to database", '/products/save_one_to_database' %>
 <br>
 
 <h2>Create New Product</h2>
@@ -47,7 +47,7 @@
 
 <ul>
   <% @products_from_rails.each do |product| %>
-    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
+    <li><%= product.title %></li>
   <% end %>
 </ul>
 
