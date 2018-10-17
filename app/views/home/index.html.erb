@@ -6,58 +6,59 @@
   </script>
 <% end %>
 
-<h1>TESTHKDLJDKFLSJFKLDSJFKLSDJKLDS</h1>
-<h2>dsfsdfdsfdsf</h2>
+<div class="row">
+  <br>
+  <%= button_to "Save products to database", '/products/save_to_database' %>
+  <br>
+  <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
+  <br>
 
-<br>
-<%= button_to "Save products to database", '/products/save_to_database' %>
-<br>
-<%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
-<br>
-<%= button_to "Delete all products from database", '/destroy_all' %>
-<br>
-
-<h2>Create New Product</h2>
-<%= form_with url: '/products/new' do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <br>
-  <%= f.label :product_type %>
-  <%= f.text_field :product_type %>
-  <br>
-  <%= f.label :price %>
-  <%= f.text_field :price %>
-  <br>
-  <%= f.label :sizes %>
-  <%= f.text_field :sizes, placeholder: "S, M, L" %>
-  <br>
-  <%= f.label :colors %>
-  <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
-  <br>
-  <%= f.submit "Create" %>
-<% end %>
-
-<hr>
-
-<h2>Products from shopify</h2>
-<ul>
-  <% @products.each do |product| %>
-    <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
+  <h2>Create New Product</h2>
+  <%= form_with url: '/products/new' do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br>
+    <%= f.label :product_type %>
+    <%= f.text_field :product_type %>
+    <br>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+    <br>
+    <%= f.label :sizes %>
+    <%= f.text_field :sizes, placeholder: "S, M, L" %>
+    <br>
+    <%= f.label :colors %>
+    <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
+    <br>
+    <%= f.submit "Create" %>
   <% end %>
-</ul>
 
-<hr>
+  <hr>
+</div>
 
-<h2>Products from Rails</h2>
-<ol>
-  <% @products_from_rails.each do |product| %>
-    <li><%= product.title %></li>
+<div class="row">
+
+  <div class="column green">
+    <h2>Products from shopify</h2>
     <ul>
-      <% product.variants.each do |variant| %>
-        <li><%= variant.title %></li>
+      <% @products.each do |product| %>
+        <li><%= link_to product.title, "https://#{@shop_session.url}/admin/products/#{product.id}", target: "_top" %></li>
       <% end %>
     </ul>
-  <% end %>
-</ol>
+  </div>
 
-<div style="background-color: red; height: 400px; width: 400px;"</div>
+  <div class="column blue">
+    <h2>Products from Rails</h2>
+    <ol>
+      <% @products_from_rails.each do |product| %>
+        <li><%= product.title %></li>
+        <ul>
+          <% product.variants.each do |variant| %>
+            <li><%= variant.title %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ol>
+  </div>
+
+</div>
