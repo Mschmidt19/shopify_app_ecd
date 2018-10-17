@@ -34,7 +34,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def create
-
+    Product.create(product_params)
   end
 
   def save_to_database
@@ -51,9 +51,9 @@ class ProductsController < ShopifyApp::AuthenticatedController
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         products += new_products
         new_products.each do |new_product|
-          rails_product = Product.create()
-          rails_product.shopify_id = new_product["id"]
-          rails_product.title = new_product["title"]
+          # rails_product = Product.create()
+          # rails_product.shopify_id = new_product["id"]
+          # rails_product.title = new_product["title"]
           # rails_product.shopify_created_at = new_product["created_at"]
           # rails_product.shopify_updated_at = new_product["updated_at"]
           # rails_product.shopify_published_at = new_product["published_at"]
@@ -69,6 +69,8 @@ class ProductsController < ShopifyApp::AuthenticatedController
           #   rails_variant.shopify_product_id = new_variant["product_id"]
 
           # end
+
+          rails_product = Product.create(new_product)
           if rails_product.save
             redirect_to root_path
           end
