@@ -28,35 +28,38 @@
   <% end %>
 </div> -->
 
-<div class="row centered">
-  <h2>Create a New Product</h2>
-  <table>
-    <%= form_with url: '/products/new' do |f| %>
-      <tr>
-        <td><%= f.label :title %></td>
-        <td><%= f.text_field :title %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :product_type %></td>
-        <td><%= f.text_field :product_type %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :price %></td>
-        <td><%= f.text_field :price %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :sizes %></td>
-        <td><%= f.text_field :sizes, placeholder: "S, M, L" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :colors %></td>
-        <td><%= f.text_field :colors, placeholder: "Blue, Black, Brown" %></td>
-      </tr>
-      <tr>
-        <td><%= f.submit "Create" %></td>
-      </tr>
-    <% end %>
-  </table>
+<div class="row">
+  <h2 class="centered">Create a New Product</h2>
+  <div class="centered_div">
+    <table>
+      <%= form_with url: '/products/new' do |f| %>
+        <tr>
+          <td><%= f.label :title %></td>
+          <td><%= f.text_field :title %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :product_type %></td>
+          <td><%= f.text_field :product_type %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :price %></td>
+          <td><%= f.text_field :price %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :sizes %></td>
+          <td><%= f.text_field :sizes, placeholder: "S, M, L" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :colors %></td>
+          <td><%= f.text_field :colors, placeholder: "Blue, Black, Brown" %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit "Create" %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
 
 <br><br>

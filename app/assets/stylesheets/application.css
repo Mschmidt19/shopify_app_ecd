@@ -7,6 +7,12 @@ html body {
   text-align: center;
 }
 
+.centered_div {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .column {
     float: left;
     width: 47%;
@@ -24,6 +30,14 @@ html body {
     content: "";
     display: table;
     clear: both;
+}
+
+.table {
+  width: 100%;
+}
+.td {
+  padding: 10px;
+  text-align: left;
 }
 
 .text_left {
