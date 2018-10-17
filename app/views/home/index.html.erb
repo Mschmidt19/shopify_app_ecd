@@ -47,21 +47,18 @@
 
 <h2>Products from Rails</h2>
 
-<ul>
+<ol>
   <% @products_from_rails.each do |product| %>
     <li><%= product.title %></li>
+    <ul>
+      <% @products_from_rails.variants.each do |variant| %>
+        <li><%= variant.title %></li>
+      <% end %>
+    </ul>
   <% end %>
-</ul>
+</ol>
 
 <br>
-
-<h2>Variants from Rails</h2>
-
-<ul>
-  <% @variants_from_rails.each do |variant| %>
-    <li><%= variant.title %></li>
-  <% end %>
-</ul>
 
 <br>
 <br>
@@ -71,7 +68,7 @@
 <p><%= Shopify.products() %></p>
 <br><br><br><br><br> -->
 <ul>
-  <%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.variants.each do |variant| %>
+  <% ShopifyAPI::Product.all(:params => {:limit => 1}).first.variants.each do |variant| %>
     <li><%= variant.title %></li>
   <% end %>
 </ul><br><br>
