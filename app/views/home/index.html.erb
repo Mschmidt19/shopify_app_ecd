@@ -55,7 +55,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><%= f.submit "Create" %></td>
+          <td class="submit_button_td"><%= f.submit "Create" %></td>
         </tr>
       <% end %>
     </table>
@@ -81,7 +81,7 @@
 <br><br>
 
 <div class="row">
-  <div class="column left">
+  <div class="column_narrow left_narrow">
     <h2>Products from shopify</h2>
     <ul>
       <% @products.each do |product| %>
@@ -90,7 +90,7 @@
     </ul>
   </div>
 
-  <div class="column right">
+  <div class="column_narrow right_narrow">
     <h2>Products from rails</h2>
     <ol>
       <% @products_from_rails.each do |product| %>
