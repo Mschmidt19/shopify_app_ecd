@@ -50,7 +50,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       while page <= total_pages
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         new_products.each do |new_product|
-          if !Product.exists?(shopify_id: new_product.id)
+          if !Product.exists?(shopify_id: new_product.id) == false)
             hash = {
               "shopify_id": new_product.id,
               "title": new_product.title,
@@ -63,13 +63,8 @@ class ProductsController < ShopifyApp::AuthenticatedController
               "shopify_published_at": new_product.published_at,
               "tags": new_product.tags
             }
-            rails_product = Product.create(hash)
-          else
-            rails_product = Product.where(shopify_id: new_product.id)
-          end
-          variant_hash_array = []
-          new_product.variants.each do |variant|
-            if !Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id)
+            variant_hash_array = []
+            new_product.variants.each do |variant|
               variant_hash = {
                 "shopify_id": variant.id,
                 "shopify_product_id": variant.product_id,
@@ -90,6 +85,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
               variant_hash_array.push(variant_hash)
             end
           end
+          rails_product = Product.create(hash)
           rails_product.variants.create(variant_hash_array) unless variant_hash_array.empty?
         end
         puts `Processing page #{page} of #{total_pages}`
