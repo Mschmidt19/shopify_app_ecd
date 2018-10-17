@@ -43,7 +43,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
     count = ShopifyAPI::Product.count
     if count > 0
       total_pages = count.divmod(items_per_page).first
-      if count.divmod(items_per_page).last != 0
+      if count.divmod(items_per_page).last != 0 && count > items_per_page
         total_pages += 1
       end
       page = 1
