@@ -84,9 +84,9 @@ class ProductsController < ShopifyApp::AuthenticatedController
               }
               variant_hash_array.push(variant_hash)
             end
+            rails_product = Product.create(hash)
+            rails_product.variants.create(variant_hash_array) unless variant_hash_array.empty?
           end
-          rails_product = Product.create(hash)
-          rails_product.variants.create(variant_hash_array) unless variant_hash_array.empty?
         end
         puts `Processing page #{page} of #{total_pages}`
         page += 1
