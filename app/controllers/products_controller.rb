@@ -125,7 +125,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
 
   def save_another_to_database
     new_products = Shopify.products()
-    new_product = new_products["products"].first
+    new_product = new_products[:products].first
     new_product.delete("template_suffix")
     new_product.delete("published_scope")
     new_product.delete("admin_graphql_api_id")

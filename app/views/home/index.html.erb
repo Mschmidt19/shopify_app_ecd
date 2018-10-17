@@ -56,8 +56,10 @@
 <br>
 <br>
 <br>
-<p><%= Shopify.products()["products"].first %></p><br><br>
-<p><%= Shopify.products()["products"]%></p><br><br>
+<p><%= (Shopify.products())["products"].first %></p><br><br>
+<p><%= (Shopify.products())[:products].first%></p><br><br>
+<p><%= (Shopify.products())["products"] %></p><br><br>
+<p><%= (Shopify.products())[:products]%></p><br><br>
 <p><%= Shopify.products() %></p>
 
 <!-- <h2>Webhooks</h2>
