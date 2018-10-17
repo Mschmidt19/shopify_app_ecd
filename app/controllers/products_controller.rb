@@ -51,7 +51,20 @@ class ProductsController < ShopifyApp::AuthenticatedController
         new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
         products += new_products
         new_products.each do |new_product|
-          self.save_another_to_database(new_product)
+          hash = {
+            "shopify_id": new_product.id,
+            "title": new_product.title,
+            "shopify_created_at": new_product.created_at,
+            "shopify_updated_at": new_product.updated_at,
+            "shopify_published_at": new_product.published_at,
+            "body_html": new_product.body_html,
+            "handle": new_product.handle,
+            "product_type": new_product.product_type,
+            "tags": new_product.tags,
+            "vendor": new_product.vendor
+          }
+          rails_product = Product.create(hash)
+          rails_product.save
         end
         puts `Processing page #{page} of #{total_pages}`
         page += 1
@@ -75,7 +88,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       "tags": new_product.tags
     }
     rails_product = Product.create(hash)
-    rails.save
+    rails_product.save
   end
 
   def save_one_to_database
