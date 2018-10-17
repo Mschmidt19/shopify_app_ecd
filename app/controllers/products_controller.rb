@@ -34,6 +34,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
 
   def destroy_all_from_database
     Product.destroy_all
+    redirect_to root_path
   end
 
   def save_to_database

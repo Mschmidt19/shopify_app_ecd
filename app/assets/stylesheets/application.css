@@ -25,3 +25,7 @@ html body {
     display: table;
     clear: both;
 }
+
+.text_left {
+  text-align: left
+}
