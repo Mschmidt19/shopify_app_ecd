@@ -54,20 +54,29 @@
 </ul>
 
 <br>
+
+<h2>Variants from Rails</h2>
+
+<ul>
+  <% @variants_from_rails.each do |variant| %>
+    <li><%= variant.title %></li>
+  <% end %>
+</ul>
+
+<br>
 <br>
 <br>
 <!-- <p><%= (Shopify.products())["products"].first %></p><br><br>
 <p><%= (Shopify.products())["products"] %></p><br><br>
 <p><%= Shopify.products() %></p>
 <br><br><br><br><br> -->
-<ul>
+<!-- <ul>
   <%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.variants.each do |variant| %>
     <li><%= variant.title %></li>
   <% end %>
 </ul><br><br>
-<p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.variants %></p><br><br>
 <p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first %></p><br><br>
-<p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.title %></p>
+<p><%= ShopifyAPI::Product.all(:params => {:limit => 1}).first.title %></p> -->
 
 <!-- <h2>Webhooks</h2>
 

@@ -4,6 +4,7 @@ class HomeController < ShopifyApp::AuthenticatedController
   def index
     @products = ShopifyAPI::Product.find(:all)
     @products_from_rails = Product.all
+    @variants_from_rails = Variant.all
   end
 
 
