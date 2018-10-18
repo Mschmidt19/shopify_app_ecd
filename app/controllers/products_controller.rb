@@ -15,7 +15,9 @@ class ProductsController < ShopifyApp::AuthenticatedController
     product = ShopifyAPI::Product.new
     product.title = params[:title]
     product.product_type = params[:product_type]
-    product.variants = make_variant_hash(params[:sizes], params[:colors], params[:price])
+    sizes = split_sizes(params[:sizes])
+    colors = split_colors(params[:colors])
+    product.variants = make_variant_hash(sizes, colors, params[:price])
     product.options = [
       {
         "name": "Size",
@@ -83,23 +85,29 @@ class ProductsController < ShopifyApp::AuthenticatedController
 
   private
 
-  def make_variant_hash(sizes_param, colors_param, price_param)
-    sizes = sizes_param.split(/\s*,\s*/)
-    colors = colors_param.split(/\s*,\s*/)
+  def split_sizes(sizes_string)
+    sizes_string.split(/\s*,\s*/)
+  end
+
+  def split_colors(colors_string)
+    colors_string.split(/\s*,\s*/)
+  end
+
+  def make_variant_hash(sizes, colors, price)
     variants = []
     sizes.each do |size|
       colors.each do |color|
         variant = {}
         variant["option1"] = size
         variant["option2"] = color
-        variant["price"] = price_param
+        variant["price"] = price
         variants.push(variant)
       end
     end
-    return variants
+    variants
   end
 
-  def make_options_array
+  def make_options_array(sizes, colors)
     options_array =
     [
       {
@@ -111,7 +119,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
         "values": colors
       }
     ]
-    return options_array
+    options_array
   end
 
   def next_five_products(page, limit)
@@ -136,7 +144,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
     else
       rails_product = Product.where(shopify_id: product.id).first
     end
-    return rails_product
+    rails_product
   end
 
   def create_new_variants_array(product)
@@ -163,7 +171,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
         variant_hash_array.push(variant_hash)
       end
     end
-    return variant_hash_array
+    variant_hash_array
   end
 
   def product_params
