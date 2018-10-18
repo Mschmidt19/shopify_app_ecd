@@ -1,11 +1,43 @@
 class ProductsController < ShopifyApp::AuthenticatedController
 
+  # def new
+  #   product = ShopifyAPI::Product.new
+  #   product.title = params[:title]
+  #   product.product_type = params[:product_type]
+  #   product.variants = make_variant_hash(params[:sizes], params[:colors], params[:price])
+  #   product.options = make_options_array()
+  #   if product.save
+  #     redirect_to root_path
+  #   end
+  # end
+
   def new
     product = ShopifyAPI::Product.new
     product.title = params[:title]
     product.product_type = params[:product_type]
-    product.variants = make_variant_hash(params[:sizes], params[:colors])
-    product.options = make_options_array()
+    sizes = params[:sizes].split(/\s*,\s*/)
+    colors = params[:colors].split(/\s*,\s*/)
+    variants = []
+    sizes.each do |size|
+      colors.each do |color|
+        variant = {}
+        variant["option1"] = size
+        variant["option2"] = color
+        variant["price"] = params[:price]
+        variants.push(variant)
+      end
+    end
+    product.variants = variants
+    product.options = [
+      {
+        "name": "Size",
+        "values": sizes
+      },
+      {
+        "name": "Color",
+        "values": colors
+      }
+    ]
     if product.save
       redirect_to root_path
     end
@@ -51,23 +83,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       while page <= total_pages
         new_products = next_five_products(page, items_per_page)
         new_products.each do |new_product|
-          if !Product.exists?(shopify_id: new_product.id)
-            hash = {
-              "shopify_id": new_product.id,
-              "title": new_product.title,
-              "body_html": new_product.body_html,
-              "vendor": new_product.vendor,
-              "product_type": new_product.product_type,
-              "shopify_created_at": new_product.created_at,
-              "handle": new_product.handle,
-              "shopify_updated_at": new_product.updated_at,
-              "shopify_published_at": new_product.published_at,
-              "tags": new_product.tags
-            }
-            rails_product = Product.create(hash)
-          else
-            rails_product = Product.where(shopify_id: product.id).first
-          end
+          rails_product = create_or_find_product(new_product)
           variant_hash_array = []
           new_product.variants.each do |variant|
             if !Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id)
@@ -101,7 +117,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
 
   private
 
-  def make_variant_hash(sizes_param, colors_param)
+  def make_variant_hash(sizes_param, colors_param, price_param)
     sizes = sizes_param.split(/\s*,\s*/)
     colors = colors_param.split(/\s*,\s*/)
     variants = []
@@ -110,7 +126,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
         variant = {}
         variant["option1"] = size
         variant["option2"] = color
-        variant["price"] = params[:price]
+        variant["price"] = price_param
         variants.push(variant)
       end
     end
