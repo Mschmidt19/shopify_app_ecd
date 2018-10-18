@@ -28,16 +28,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       end
     end
     product.variants = variants
-    product.options = [
-      {
-        "name": "Size",
-        "values": sizes
-      },
-      {
-        "name": "Color",
-        "values": colors
-      }
-    ]
+    product.options = make_options_array()
     if product.save
       redirect_to root_path
     end
@@ -84,29 +75,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
         new_products = next_five_products(page, items_per_page)
         new_products.each do |new_product|
           rails_product = create_or_find_product(new_product)
-          variant_hash_array = []
-          new_product.variants.each do |variant|
-            if !Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id)
-              variant_hash = {
-                "shopify_id": variant.id,
-                "shopify_product_id": variant.product_id,
-                "title": variant.title,
-                "shopify_created_at": variant.created_at,
-                "shopify_updated_at": variant.updated_at,
-                "price": variant.price,
-                "sku": variant.sku,
-                "option1": variant.option1,
-                "option2": variant.option2,
-                "option3": variant.option3,
-                "position": variant.position,
-                "taxable": variant.taxable,
-                "weight": variant.weight,
-                "weight_unit": variant.weight_unit,
-                "inventory_quantity": variant.inventory_quantity
-              }
-              variant_hash_array.push(variant_hash)
-            end
-          end
+          variant_hash_array = create_new_variants_array(new_product)
           rails_product.variants.create(variant_hash_array) unless variant_hash_array.empty?
         end
         page += 1
@@ -134,18 +103,18 @@ class ProductsController < ShopifyApp::AuthenticatedController
   end
 
   def make_options_array
-  options_array =
-  [
-    {
-      "name": "Size",
-      "values": sizes
-    },
-    {
-      "name": "Color",
-      "values": colors
-    }
-  ]
-  return options_array
+    options_array =
+    [
+      {
+        "name": "Size",
+        "values": sizes
+      },
+      {
+        "name": "Color",
+        "values": colors
+      }
+    ]
+    return options_array
   end
 
   def next_five_products(page, limit)
@@ -176,7 +145,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
   def create_new_variants_array(product)
     variant_hash_array = []
     product.variants.each do |variant|
-      if !Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id)
+      if !Variant.exists?(shopify_product_id: product.id, shopify_id: variant.id)
         variant_hash = {
           "shopify_id": variant.id,
           "shopify_product_id": variant.product_id,
