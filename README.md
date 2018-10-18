@@ -33,8 +33,7 @@ This app is a proof of concept and would not be viable for public use due to usi
 
 ## How To Use
 
-### 1. - Visit the app on Heroku
-* [ecd-shopify-app](https://ecd-shopify-app.herokuapp.com/)
+### 1. - Visit the app on Heroku: [ecd-shopify-app](https://ecd-shopify-app.herokuapp.com/)
 
 ### 2. - Enter the URL of your Shopify store
 * ![Entering Shopify URL](https://i.imgur.com/RSk6vef.jpg)
