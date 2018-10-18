@@ -1,5 +1,5 @@
 <div id="main_container">
-  
+
   <% content_for :javascript do %>
     <script type="text/javascript">
       ShopifyApp.ready(function(){
@@ -7,28 +7,6 @@
       });
     </script>
   <% end %>
-
-  <!-- <div class="row centered">
-    <h2>Create a New Product</h2>
-    <%= form_with url: '/products/new' do |f| %>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-      <br>
-      <%= f.label :product_type %>
-      <%= f.text_field :product_type %>
-      <br>
-      <%= f.label :price %>
-      <%= f.text_field :price %>
-      <br>
-      <%= f.label :sizes %>
-      <%= f.text_field :sizes, placeholder: "S, M, L" %>
-      <br>
-      <%= f.label :colors %>
-      <%= f.text_field :colors, placeholder: "Blue, Black, Brown" %>
-      <br>
-      <%= f.submit "Create" %>
-    <% end %>
-  </div> -->
 
   <div class="row">
     <h2 class="centered">Create a New Product</h2>

@@ -11,6 +11,10 @@ input.long {
   width: 100%
 }
 
+ol > li {
+  margin-bottom: 2%;
+}
+
 table {
   width: 100%;
   font-size: 18px;
