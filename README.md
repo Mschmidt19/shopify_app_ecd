@@ -26,9 +26,9 @@
 ```
 
 ## Thought process
-I wanted to ensure this app can be tested properly. In order to do this I focused on a few main points other than solving the tasks given.
-Once all tasks were accomplished, I ensured that clicking the 'Save all product to database' button will first check if that product is already present in the database. Once that was complete, I realized that additional variants could have been added to an existing product so I added an extra check to ensure these new variants will be added despite the product already existing.
-Lastly, I wanted the user to be able to delete the products from the database themselves so that the list of items won't get overly long when testing. This allows a user to wipe any existing data before trying it with their own app.
+I wanted to ensure this app can be tested properly. In order to do this I focused on a few main points other than solving the tasks given. I also made my app an embedded app so that it can be accessed directly from the Shopify Admin panel.  
+Once all tasks were accomplished, I ensured that clicking the 'Save all product to database' button will first check if that product is already present in the database. Once that was complete, I realized that additional variants could have been added to an existing product so I added an extra check to ensure these new variants will be added despite the product already existing.  
+Lastly, I wanted the user to be able to delete the products from the database themselves so that the list of items won't get overly long when testing. This allows a user to wipe any existing data before trying it with their own app.  
 This app is a proof of concept and would not be viable for public use due to using a shared Heroku database rather than a local database specific to each user
 
 ## How To Use
@@ -37,10 +37,10 @@ This app is a proof of concept and would not be viable for public use due to usi
 * [ecd-shopify-app](https://ecd-shopify-app.herokuapp.com/)
 
 ### 2. - Enter the URL of your Shopify store
-* ![Entering Shopify URL](https://imgur.com/RSk6vef)
+* ![Entering Shopify URL](https://i.imgur.com/RSk6vef.jpg)
 
 ### 3. - Sign in to your Shopify account using your Shopify Email and Password
-* ![Entering Shopify Credentials](https://imgur.com/CwOCwzE)
+* ![Entering Shopify Credentials](https://i.imgur.com/CwOCwzE.jpg)
 
 ### 4. - Use the app!
 #### There are five main components of the app:
@@ -49,7 +49,7 @@ This app is a proof of concept and would not be viable for public use due to usi
 * A button which will clear all products from the Heroku database. This exists so that you can test the app properly
 * A list of all products in your Shopify store
 * A list of all products and variants that are saved in the Heroku database
-* ![The form and two buttons](https://imgur.com/uQhb99a)
+* ![The form and two buttons](https://i.imgur.com/uQhb99a.jpg)
 #### To add a product fill out the form as shown in the image below
 * Enter the product title
 * Enter the product type
@@ -57,14 +57,14 @@ This app is a proof of concept and would not be viable for public use due to usi
 * Enter any sizes you would like to include separated by commas
 * Enter any colors you would like to include separated by commas
 * Click the 'Create' button
-* ![Filled out form](https://imgur.com/Tnpb4GU)
+* ![Filled out form](https://i.imgur.com/Tnpb4GU.jpg)
 #### Adding a product will add it to the 'Products from shopify' list on the left
 * Each product will link you to the product in your Shopify Admin panel for updating
-* ![List of Shopify products](https://imgur.com/1Qnufu6)
+* ![List of Shopify products](https://i.imgur.com/1Qnufu6.jpg)
 #### Clicking 'Save all products to database' will add all existing products to the 'Products from rails' list on the right
 * Each product will be listed by its title and show the titles of all corresponding variants
 * Products are pulled and added in batches of five at a time
 * If a product already exists in the Heroku database it will be skipped
 * If a product already exists but additional variants have been added, only the new variants will be added to the Heroku database
-* ![List of Rails products](https://imgur.com/NfeyQ7H)
+* ![List of Rails products](https://i.imgur.com/NfeyQ7H.jpg)
 #### Clicking 'Delete all products from database' will remove all products from the Heroku database
