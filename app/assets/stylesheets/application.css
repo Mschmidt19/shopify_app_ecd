@@ -3,12 +3,17 @@ html body {
   padding-right: 2%;
 }
 
+input {
+  width: 30%;
+}
+
 input.long {
   width: 100%
 }
 
 table {
   width: 100%;
+  font-size: 18px;
 }
 
 td {
@@ -18,7 +23,6 @@ td {
 }
 
 td:first-child {
-  text-align: right;
   width: 30%;
 }
 
