@@ -35,7 +35,7 @@
           </tr>
           <tr>
             <td></td>
-            <td class="submit_button_td"><%= f.submit "Create" %></td>
+            <td class="submit_button_td"><%= f.submit "Create", :class => "padded" %></td>
           </tr>
         <% end %>
       </table>
@@ -48,11 +48,11 @@
 
   <div class="row">
     <div class="column left centered">
-      <%= button_to "Save all products to database", '/products/save_to_database' %>
+      <%= button_to "Save all products to database", '/products/save_to_database', :class => "padded" %>
     </div>
 
     <div class="column right centered">
-      <%= button_to "Delete all products from database", '/products/destroy_all_from_database' %>
+      <%= button_to "Delete all products from database", '/products/destroy_all_from_database', :class => "padded" %>
     </div>
   </div>
 

@@ -1,16 +1,5 @@
 class ProductsController < ShopifyApp::AuthenticatedController
 
-  # def new
-  #   product = ShopifyAPI::Product.new
-  #   product.title = params[:title]
-  #   product.product_type = params[:product_type]
-  #   product.variants = make_variant_hash(params[:sizes], params[:colors], params[:price])
-  #   product.options = make_options_array()
-  #   if product.save
-  #     redirect_to root_path
-  #   end
-  # end
-
   def new
     product = ShopifyAPI::Product.new
     product.title = params[:title]
@@ -28,29 +17,6 @@ class ProductsController < ShopifyApp::AuthenticatedController
     Product.destroy_all
     redirect_to root_path
   end
-
-  # def save_to_database
-  #   items_per_page = 5
-  #   products = []
-  #   count = ShopifyAPI::Product.count
-  #   if count > 0
-  #     total_pages = count.divmod(items_per_page).first
-  #     if count.divmod(items_per_page).last != 0 && count > items_per_page
-  #       total_pages += 1
-  #     end
-  #     page = 1
-  #     while page <= total_pages
-  #       new_products = next_five_products(page, items_per_page)
-  #       new_products.each do |new_product|
-  #         rails_product = create_or_find_product(new_product)
-  #         variant_hash_array = create_new_variants_array(new_product)
-  #         rails_product.variants.create(variant_hash_array) unless variant_hash_array.empty?
-  #       end
-  #       page += 1
-  #     end
-  #     redirect_to root_path
-  #   end
-  # end
 
   def save_to_database
     items_per_page = 5

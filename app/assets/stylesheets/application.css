@@ -73,6 +73,10 @@ td:first-child {
   margin-right: 8%;
 }
 
+.padded {
+  padding: 1vmin;
+}
+
 .right {
   margin-left: 1%
 }
