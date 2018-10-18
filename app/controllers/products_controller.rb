@@ -18,16 +18,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
     sizes = split_sizes(params[:sizes])
     colors = split_colors(params[:colors])
     product.variants = make_variant_hash(sizes, colors, params[:price])
-    product.options = [
-      {
-        "name": "Size",
-        "values": sizes
-      },
-      {
-        "name": "Color",
-        "values": colors
-      }
-    ]
+    product.options = make_options_array(sizes, colors)
     if product.save
       redirect_to root_path
     end
