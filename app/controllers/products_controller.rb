@@ -15,20 +15,17 @@ class ProductsController < ShopifyApp::AuthenticatedController
     product = ShopifyAPI::Product.new
     product.title = params[:title]
     product.product_type = params[:product_type]
-    sizes = params[:sizes].split(/\s*,\s*/)
-    colors = params[:colors].split(/\s*,\s*/)
-    variants = []
-    sizes.each do |size|
-      colors.each do |color|
-        variant = {}
-        variant["option1"] = size
-        variant["option2"] = color
-        variant["price"] = params[:price]
-        variants.push(variant)
-      end
-    end
-    product.variants = variants
-    product.options = make_options_array
+    product.variants = make_variant_hash(params[:sizes], params[:colors], params[:price])
+    product.options = [
+      {
+        "name": "Size",
+        "values": sizes
+      },
+      {
+        "name": "Color",
+        "values": colors
+      }
+    ]
     if product.save
       redirect_to root_path
     end
