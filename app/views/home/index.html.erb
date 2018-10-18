@@ -35,23 +35,23 @@
       <%= form_with url: '/products/new' do |f| %>
         <tr>
           <td><%= f.label :title %></td>
-          <td><%= f.text_field :title %></td>
+          <td><%= f.text_field :title, :class => "long" %></td>
         </tr>
         <tr>
           <td><%= f.label :product_type %></td>
-          <td><%= f.text_field :product_type %></td>
+          <td><%= f.text_field :product_type, :class => "long" %></td>
         </tr>
         <tr>
           <td><%= f.label :price %></td>
-          <td><%= f.text_field :price %></td>
+          <td><%= f.text_field :price, :class => "long" %></td>
         </tr>
         <tr>
           <td><%= f.label :sizes %></td>
-          <td><%= f.text_field :sizes, placeholder: "S, M, L" %></td>
+          <td><%= f.text_field :sizes, placeholder: "S, M, L", :class => "long" %></td>
         </tr>
         <tr>
           <td><%= f.label :colors %></td>
-          <td><%= f.text_field :colors, placeholder: "Blue, Black, Brown" %></td>
+          <td><%= f.text_field :colors, placeholder: "Blue, Black, Brown", :class => "long" %></td>
         </tr>
         <tr>
           <td></td>
