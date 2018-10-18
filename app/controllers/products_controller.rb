@@ -48,41 +48,48 @@ class ProductsController < ShopifyApp::AuthenticatedController
       end
       page = 1
       while page <= total_pages
-        new_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => items_per_page})
+        new_products = next_five_products(page, items_per_page)
         new_products.each do |new_product|
-          if !Product.exists?(shopify_id: new_product.id)
-            hash = {
-              "shopify_id": new_product.id,
-              "title": new_product.title,
-              "body_html": new_product.body_html,
-              "vendor": new_product.vendor,
-              "product_type": new_product.product_type,
-              "shopify_created_at": new_product.created_at,
-              "handle": new_product.handle,
-              "shopify_updated_at": new_product.updated_at,
-              "shopify_published_at": new_product.published_at,
-              "tags": new_product.tags
-            }
-            rails_product = Product.create(hash)
-          else
-            rails_product = Product.where(shopify_id: new_product.id).first
-          end
-          variant_hash_array = create_new_variants_array
+          rails_product = create_or_find_product(new_product)
+          variant_hash_array = create_new_variants_array(new_product)
           rails_product.variants.create(variant_hash_array) unless variant_hash_array.empty?
         end
-        puts `Processing page #{page} of #{total_pages}`
         page += 1
       end
-      puts `Finished - processed #{products.count} products`
       redirect_to root_path
     end
   end
 
   private
 
-  def create_new_variants_array
+  def next_five_products(page, limit)
+    five_products = ShopifyAPI::Product.all(:params => {:page => page, :limit => limit})
+  end
+
+  def create_or_find_product(product)
+    if !Product.exists?(shopify_id: product.id)
+      hash = {
+        "shopify_id": product.id,
+        "title": product.title,
+        "body_html": product.body_html,
+        "vendor": product.vendor,
+        "product_type": product.product_type,
+        "shopify_created_at": product.created_at,
+        "handle": product.handle,
+        "shopify_updated_at": product.updated_at,
+        "shopify_published_at": product.published_at,
+        "tags": product.tags
+      }
+      rails_product = Product.create(hash)
+    else
+      rails_product = Product.where(shopify_id: product.id).first
+    end
+    return rails_product
+  end
+
+  def create_new_variants_array(product)
     variant_hash_array = []
-    new_product.variants.each do |variant|
+    product.variants.each do |variant|
       if !Variant.exists?(shopify_product_id: new_product.id, shopify_id: variant.id)
         variant_hash = {
           "shopify_id": variant.id,
