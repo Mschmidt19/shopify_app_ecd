@@ -28,7 +28,7 @@ class ProductsController < ShopifyApp::AuthenticatedController
       end
     end
     product.variants = variants
-    product.options = make_options_array()
+    product.options = make_options_array
     if product.save
       redirect_to root_path
     end
